@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>【WEBシステム】砂防エンジニアリング</title>
+   <style>
+div.pagebody {
+	width:1200px; margin:0;	/*内容全体をセンタリング*/
+	text-align:left;	/*テキストの配置を左揃えにする*/
+}
+div#submenu{
+width:250px;
+display: inline-block;
+vertical-align: top;
+font-size:120%;
+}
+
+h1 {
+	padding:0px 0px 0px 30px;		/*見出し内容の位置調整*/
+}
+    div.result {
+    display: inline-block;      /* インラインブロック要素にする */
+    width: 270px;
+    height:auto;
+    vertical-align: top;
+    margin-left:5px;
+    margin-right:5px;
+         }
+    p.result{
+    font-size:120%;
+    line-height:1.2;
+    text-align:center;
+     }
+    p.index{
+    font-size:120%;
+    line-height:1.2;
+     }
+    body{
+    width:auto;
+    padding: 0.5em 2em;
+    margin: 2em 1em;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic' 
+          }
+    button{width:130px;}
+
+div.main {
+	width:850px; margin-right:5px; padding-top:10px; /*幅の指定と位置調整*/
+	background-image:url("images/bar_news.gif");	/*中央カラムの背景画像*/
+	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
+	display: inline-block; 
+}
+   </style>
+  </head>
+  <body>
+    {% block content %}
+    <!-- ここに内容 -->
+    {% endblock %}
+  </body>
+</html>

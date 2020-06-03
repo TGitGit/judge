@@ -1,0 +1,241 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>イルカサメ判定</h2>
+{% if len_upload_files  == 1 %}
+    <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[0] ==0　%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+　　{%endif%}　
+
+{% elif len_upload_files  == 2 %}
+<div class=result>
+    <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height=auto></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[0] ==0　%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>  
+       {%else%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+　　{%endif%}　
+</div>
+<div class=result>
+    <p class=result><img src="{{filelist[1]}}"alt="サンプル画像"width=270 height=auto></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[1]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[1] ==0　%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+　　{%endif%}　
+
+</div>
+
+{% elif len_upload_files  == 3 %}
+<div class=result>
+    <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height=auto></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[0] ==0　%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>  
+       {%else%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+　　{%endif%}　
+</div>
+<div class=result>
+    <p class=result><img src="{{filelist[1]}}"alt="サンプル画像"width=270height=auto></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[1]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[1] ==0　%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+　　{%endif%}
+</div>
+<div class=result>
+    <p class=result><img src="{{filelist[2]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[2]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[2] ==0　%}
+       <p class=result>{{filename[2]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[2]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+　　{%endif%}
+</div>　
+{% elif len_upload_files  == 4 %}
+<div class=result>
+    <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[0] ==0　%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[1]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[1]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[1] ==0　%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[2]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[2]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[2] ==0　%}
+       <p class=result>{{filename[2]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[2]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[3]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[3]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[3] ==0　%}
+       <p class=result>{{filename[3]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[3]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+　　{%endif%}　
+</div>
+{% elif len_upload_files  == 5 %}
+<div class=result>
+    <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[0]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[0] ==0　%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[0]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[1]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[1]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[1] ==0　%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[1]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[2]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[2]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[2] ==0　%}
+       <p class=result>{{filename[2]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[2]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[3]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[3]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[3] ==0　%}
+       <p class=result>{{filename[3]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+       {%else%}
+       <p class=result>{{filename[3]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+　　{%endif%}
+</div>　
+<div class=result>
+    <p class=result><img src="{{filelist[4]}}"alt="サンプル画像"width=270 height="auto"></p>
+    <p class=result><img src="../images/predict_img/original/{{heatmap_name[4]}}"alt="サンプル画像"width=270 height="auto"></p>
+    {% if judged[4] ==0　%}
+       <p class=result>{{filename[4]}}</p>	
+       <p class=result>判定結果はイルカです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[4,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[4,1]}}</p>  
+       {%else%}
+       <p class=result>{{filename[4]}}</p>	
+       <p class=result>判定結果はサメです</p>
+       <p class=result>イルカである根拠は{{rounded_pr[4,0]}}</p>
+       <p class=result>サメである根拠は{{rounded_pr[4,1]}}</p> 
+　　{%endif%}　
+</div>
+{% else %}
+    <p class=result>画像枚数は5枚以内にして下さい</p>
+
+{% endif %}
+
+{% endblock %}

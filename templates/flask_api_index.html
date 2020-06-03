@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>砂防エンジニアリング</h1>
+<div class="pagebody">
+	<div id="submenu">
+		<div id="submenu_header">目的で探す</div>
+		<ul id="submenu_body">
+			<li><a href="localhost:5000/">イルカサメ判定</a></li>	
+		</ul>
+	</div>
+	<div class="main">
+	<p class="index">イルカサメ判定です<br>※ファイル名は英数字のみ対応</p>
+	<p class="index">ファイル選択ボタンから判定したい写真を選択し、判定ボタンをクリックしてください</p>
+	<p class="index">一度に最大5枚まで複数選択できます</p>
+	<form action="/result" method="post" enctype="multipart/form-data">
+   	<input type="file" name="upload_files" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
+	<button type="submit">判定</button>
+	</form>
+	</div>
+
+</div>
+{% endblock %}
