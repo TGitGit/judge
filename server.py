@@ -7,7 +7,7 @@ import shutil
 import judge_slope_danger_grad_cam
 import count_pic
 import itertools
-print("サーバを立ち上げ中")
+print("サーバを立ち上げてます")
 # ./flask_api_index.htmlからPOSTされた画像を一時保存するディレクトリ
 UPLOAD_FOLDER = "../images/predict_img/original"
 app = Flask(__name__)
