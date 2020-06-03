@@ -1,2 +1,2 @@
 import os
-print("テスト")
+print("test")
