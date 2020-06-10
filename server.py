@@ -55,6 +55,7 @@ def result():
             path_judged_l2d = judged[0].tolist()
             # リストのリストなのでさらに平坦化（1次元のリスト）する
             path_judged = list(itertools.chain.from_iterable(path_judged_l2d))
+            del path_judged_l2d
             # 判明結果の画面でファイル名表示用のリストを作成(filenameをrender_templateにわたす)
             filename = []
             fp_index = 0
