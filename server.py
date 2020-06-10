@@ -48,6 +48,7 @@ def result():
                     + count_file
                     + secure_filename(upload_file.filename)
                 )
+            del count_file
             # judge_slope_danger_grad_dam.allはoriginal/ディレクトリにある画像を読みこみ出力する。出力結果をjudgedへ代入
             judged = judge_slope_danger_grad_cam.all()
             # numpy配列なのでリストに変換

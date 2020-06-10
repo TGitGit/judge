@@ -2,21 +2,135 @@
 {% block content %}
 
 <h2>イルカサメ判定</h2>
+
 {% if len_upload_files  == 1 %}
+<div class=result>
     <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height="auto"></p>
     <p class=result><img src="../images/predict_img/original/{{heatmap_name[0]}}"alt="サンプル画像"width=270 height="auto"></p>
     {% if judged[0] ==0　%}
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+        <p class=result><canvas id="myPieChart1_dol" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart1_dol");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
-　　{%endif%}　
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+            <p class=result><canvas id="myPieChart1_sha" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
 
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart1_sha");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
+　　　　
+
+　　{%endif%}　
+</div>
 {% elif len_upload_files  == 2 %}
 <div class=result>
     <p class=result><img src="{{filelist[0]}}"alt="サンプル画像"width=270 height=auto></p>
@@ -25,12 +139,122 @@
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>  
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+        <p class=result><canvas id="myPieChart2_dol1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart2_dol1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+            <p class=result><canvas id="myPieChart2_sha" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart2_sha");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}　
 </div>
 <div class=result>
@@ -40,12 +264,123 @@
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+            <p class=result><canvas id="myPieChart2_dol2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart2_dol2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
+
        {%else%}
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+            <p class=result><canvas id="myPieChart2_sha2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart2_sha2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}　
 
 </div>
@@ -58,12 +393,122 @@
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>  
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+                <p class=result><canvas id="myPieChart3_dol1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart3_dol1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+                <p class=result><canvas id="myPieChart3_sha1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart3_sha1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}　
 </div>
 <div class=result>
@@ -73,12 +518,122 @@
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+                <p class=result><canvas id="myPieChart3_dol2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart3_dol2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+                <p class=result><canvas id="myPieChart3_sha2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart3_sha2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>
 <div class=result>
@@ -88,12 +643,122 @@
        <p class=result>{{filename[2]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p>
+        <p class=result><canvas id="myPieChart3_dol3" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart3_dol3");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[2,0]}},{{rounded_pr[2,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[2]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p>
+                <p class=result><canvas id="myPieChart3_sha3" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart3_sha3");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[2,0]}},{{rounded_pr[2,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 {% elif len_upload_files  == 4 %}
@@ -104,12 +769,122 @@
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+         <p class=result><canvas id="myPieChart4_dol1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_dol1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+     <p class=result><canvas id="myPieChart4_sha1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_sha1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -119,12 +894,122 @@
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+     <p class=result><canvas id="myPieChart4_dol2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_dol2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+     <p class=result><canvas id="myPieChart4_sha2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_sha2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -134,12 +1019,122 @@
        <p class=result>{{filename[2]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p>
+     <p class=result><canvas id="myPieChart4_dol3" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_dol3");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[2,0]}},{{rounded_pr[2,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[2]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p>
+     <p class=result><canvas id="myPieChart4_sha3" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_sha3");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[2,0]}},{{rounded_pr[2,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -149,12 +1144,122 @@
        <p class=result>{{filename[3]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p>
+     <p class=result><canvas id="myPieChart4_dol4" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_dol4");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[3,0]}},{{rounded_pr[3,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[3]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p>
+     <p class=result><canvas id="myPieChart4_sha4" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart4_sha4");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[3,0]}},{{rounded_pr[3,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}　
 </div>
 {% elif len_upload_files  == 5 %}
@@ -165,12 +1270,122 @@
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+         <p class=result><canvas id="myPieChart5_dol1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_dol1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[0]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[0,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[0,1]}}</p>
+         <p class=result><canvas id="myPieChart5_sha1" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_sha1");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[0,0]}},{{rounded_pr[0,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -180,12 +1395,122 @@
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+         <p class=result><canvas id="myPieChart5_dol2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_dol2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[1]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[1,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[1,1]}}</p>
+         <p class=result><canvas id="myPieChart5_sha2" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_sha2");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[1,0]}},{{rounded_pr[1,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -195,12 +1520,122 @@
        <p class=result>{{filename[2]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p>
+         <p class=result><canvas id="myPieChart5_dol3" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_dol3");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[2,0]}},{{rounded_pr[2,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[2]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[2,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[2,1]}}</p>
+         <p class=result><canvas id="myPieChart5_sha3" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_sha3");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[2,0]}},{{rounded_pr[2,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -210,12 +1645,122 @@
        <p class=result>{{filename[3]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p>
+         <p class=result><canvas id="myPieChart5_dol4" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_dol4");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[3,0]}},{{rounded_pr[3,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[3]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[3,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[3,1]}}</p>
+         <p class=result><canvas id="myPieChart5_sha4" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_sha4");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[3,0]}},{{rounded_pr[3,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}
 </div>　
 <div class=result>
@@ -225,12 +1770,122 @@
        <p class=result>{{filename[4]}}</p>	
        <p class=result>判定結果はイルカです</p>
        <p class=result>イルカである根拠は{{rounded_pr[4,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[4,1]}}</p>  
+       <p class=result>サメである根拠は{{rounded_pr[4,1]}}</p>
+         <p class=result><canvas id="myPieChart5_dol5" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_dol5");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[4,0]}},{{rounded_pr[4,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
        {%else%}
        <p class=result>{{filename[4]}}</p>	
        <p class=result>判定結果はサメです</p>
        <p class=result>イルカである根拠は{{rounded_pr[4,0]}}</p>
-       <p class=result>サメである根拠は{{rounded_pr[4,1]}}</p> 
+       <p class=result>サメである根拠は{{rounded_pr[4,1]}}</p>
+         <p class=result><canvas id="myPieChart5_sha5" height="auto" width="270"></canvas>
+        <script>
+  // Define a plugin to provide data labels
+Chart.plugins.register({
+    afterDatasetsDraw: function (chart, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
+
+        chart.data.datasets.forEach(function (dataset, i) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                    var fontSize = 16;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                    // Just naively convert to string for now
+                    var dataString = dataset.data[index].toString();
+
+                    // Make sure alignment settings are correct
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+            }
+        });
+    }
+});
+  var ctx = document.getElementById("myPieChart5_sha5");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["イルカ", "サメ"],
+      datasets: [{
+          backgroundColor: [
+              "#98FB98",
+              "#FF69B4"],
+          data: [{{rounded_pr[4,0]}},{{rounded_pr[4,1]}}]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+
+      }
+    }
+  });
+         </script>
 　　{%endif%}　
 </div>
 {% else %}
