@@ -28,6 +28,10 @@ h1 {
     vertical-align: top;
     margin-left:5px;
     margin-right:5px;
+    color: black;
+    padding: 0.7em;
+    background: rgba(0, 0, 0, 0.03);
+    border-top: solid 10px rgba(0, 0, 0, 0.49);
          }
     p.result{
     font-size:120%;
@@ -40,12 +44,14 @@ h1 {
      }
      p.doughnut{
      height:270px;
-    body{
+     }
+body.main{
     width:auto;
     padding: 0.5em 2em;
     margin: 2em 1em;
     color: #5d627b;
     background: white;
+
     border-top: solid 5px #5d627b;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
     font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic' 
@@ -58,9 +64,10 @@ div.main {
 	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
 	display: inline-block; 
 }
+
    </style>
   </head>
-  <body>
+  <body class="main">
     {% block content %}
     <!-- ここに内容 -->
     {% endblock %}
