@@ -10,7 +10,8 @@ import itertools
 
 # ./flask_api_index.htmlからPOSTされた画像を一時保存するディレクトリ
 UPLOAD_FOLDER = "../images/predict_img/original"
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder='Heatmap')
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
@@ -39,7 +40,7 @@ def result():
                     + secure_filename(upload_file.filename)
                 )
                 # /tmpフォルダのファイル数をカウント
-                count_file = count_pic.count_pic()
+                count_file = count_pic.count_pic(path="./tmp")
                 # おまじない(ないとupload_file.saveが何故か出来ない)
                 upload_file.stream.seek(0)
                 # 受信したファイルを連番をつけてtmp/に保存
@@ -79,7 +80,7 @@ def result():
 
 
 # 画像表示用
-@app.route("/images/predict_img/original/<filename>")
+@app.route("/tmp/<filename>")
 def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 

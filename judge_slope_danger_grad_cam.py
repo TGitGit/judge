@@ -27,7 +27,7 @@ import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import seaborn as sns
-
+import  count_pic
 
 #fix the RNG
 seed = 0
@@ -428,10 +428,14 @@ def all():
         pred_out3_l2d=pred_out[3].tolist()
         pred_out3=list(itertools.chain.from_iterable(pred_out3_l2d))
         heatmap_name="Heatmap"+os.path.basename(pred_out3[idd])
-        Heatmap_l.append(heatmap_name)
-        plt.savefig("../images/predict_img/original/"+heatmap_name)
+        count_heatmap=count_pic.count_pic(path="./Heatmap")
+        Heatmap_l.append(count_heatmap+heatmap_name)
+        plt.savefig("Heatmap/"+count_heatmap+heatmap_name)
+        plt.savefig("../images/predict_img/original/"+count_heatmap+heatmap_name)
         plt.figure()
         plt.close('all')
+        del pred_out3
+        del pred_out3_l2d
     print("predict_images\n",pred_out[0])
     print("\npredict_result\n",pred_out[1])
     print("\npredict_class\n",pred_out[2])
@@ -443,9 +447,4 @@ if __name__ == "__main__":
 # plt.figure()
 # plt.imshow(gcam_imgs_np, interpolation="nearest")
 # plt.colorbar()
-# plt.show()
-
-
-
-
-
+# plt.s
