@@ -12,11 +12,22 @@
 	<p class="index">イルカサメ判定です<br>※ファイル名は英数字のみ対応</p>
 	<p class="index">ファイル選択ボタンから判定したい写真を選択し、判定ボタンをクリックしてください</p>
 	<p class="index">一度に最大5枚まで複数選択できます</p>
+		<div id="overlay">
+			<div class="cv-spinner">
+				<span class="spinner"></span>
+			</div>
+		</div>
 	<form action="/result" method="post" enctype="multipart/form-data">
    	<input type="file" name="upload_files" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
-	<button type="submit">判定</button>
+	<button type="submit" class="btn">判定</button>
 	</form>
 	</div>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(".btn").on("click", function(){
+    $("form").submit(); //フォーム実行
+    $("#overlay").fadeIn(800); //二度押しを防ぐloading表示
+});
+</script>
 </div>
 {% endblock %}
