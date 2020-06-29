@@ -88,4 +88,5 @@ def uploaded_file(filename):
 if __name__ == "__main__":
     app.debug = True
     # 開発中はhost="localhost",社内で公開する場合はhost="0.0.0.0"
+    # ブラウザを通して他のpcからアクセスしたいときは[http://10.40.73.115:5000/]へアクセスする
     app.run(host="localhost", port=5000)
