@@ -418,7 +418,7 @@ def all():
         gcam_imgs_np = np.array(gcam_imgs)
         print(pred_out[3][idd])
         print(gcam_imgs_np.shape)
-
+        del gcam_imgs
         #グラフA
 
         sns.heatmap(gcam_imgs_np, square=True)# seaborn は(縦、横)の配列で与える
@@ -432,7 +432,7 @@ def all():
         Heatmap_l.append(count_heatmap+heatmap_name)
         plt.savefig("Heatmap/"+count_heatmap+heatmap_name)
         plt.savefig("../images/predict_img/original/"+count_heatmap+heatmap_name)
-        plt.figure()
+        # plt.figure()
         plt.close('all')
         del pred_out3
         del pred_out3_l2d

@@ -69,10 +69,10 @@ def result():
         # あらかじめ用意した"./result.html"に変数を渡す
         return render_template(
             "./result.html",
-            rounded_pr=rounded_pr,
-            judged=judged[2],
-            len_upload_files=len_upload_files,
-            filelist=path_judged,
+            rounded_pr=rounded_pr,#判定した根拠数を丸めたもの
+            judged=judged[2],#画像を判定した結果
+            len_upload_files=len_upload_files,#アップロードファイル数
+            #filelist=path_judged,
             upload_files=upload_files,
             filename=filename,
             heatmap_name=judged[5]
